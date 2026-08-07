@@ -1,0 +1,10 @@
+numpy
+pandas
+pydantic
+PyYAML
+python-dotenv
+openpyxl
+scipy
+statsmodels
+plotly
+streamlit
