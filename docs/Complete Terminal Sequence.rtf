@@ -1,0 +1,90 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2868
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 # Confirm tools\
+git --version\
+gh --version\
+\
+# Configure Git identity\
+git config --global user.name "Abhilash Tripathi"\
+git config --global user.email "YOUR_GITHUB_EMAIL"\
+\
+# Log into GitHub\
+gh auth login\
+gh auth status\
+\
+# Create project\
+mkdir -p ~/Developer/aav-analytical-review/docs/specifications\
+cd ~/Developer/aav-analytical-review\
+git init -b main\
+\
+# Copy your specification\
+cp "~/Downloads/YOUR_CURRENT_FILE.md" \\\
+  docs/specifications/v0-prototype-specification.md\
+\
+# Create README\
+cat > README.md <<'EOF'\
+# AAV Analytical Review Prototype\
+\
+A Version 0 prototype for validating, calculating, trending, and reviewing synthetic AAV analytical-development data.\
+\
+## Project status\
+\
+- Version 0 prototype specification completed\
+- Implementation not yet started\
+- Uses synthetic demonstration data only\
+- Not intended for GMP decisions or production use\
+\
+## Documentation\
+\
+The current prototype specification is located at:\
+\
+`docs/specifications/v0-prototype-specification.md`\
+EOF\
+\
+# Create gitignore\
+cat > .gitignore <<'EOF'\
+.DS_Store\
+.env\
+.env.*\
+!.env.example\
+.venv/\
+venv/\
+__pycache__/\
+*.py[cod]\
+.pytest_cache/\
+.mypy_cache/\
+.ruff_cache/\
+.vscode/\
+.idea/\
+outputs/\
+data/raw/\
+EOF\
+\
+# Review files\
+find . -maxdepth 3 -type f -print\
+git status\
+\
+# Commit\
+git add README.md .gitignore \\\
+  docs/specifications/v0-prototype-specification.md\
+git diff --cached\
+git commit -m "docs: add Version 0 prototype specification"\
+\
+# Create private GitHub repository and push\
+gh repo create aav-analytical-review \\\
+  --private \\\
+  --source=. \\\
+  --remote=origin \\\
+  --push \\\
+  --description="Prototype for rule-based review and trending of synthetic AAV analytical data."\
+\
+# Verify\
+git remote -v\
+git status\
+git log --oneline --decorate -5\
+gh repo view --web}
